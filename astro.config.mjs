@@ -3,6 +3,8 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://xtr126.github.io',
+	base: '/XtMapper-docs',
 	integrations: [
 		starlight({
 			title: 'XtMapper',
