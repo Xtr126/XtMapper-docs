@@ -1,0 +1,39 @@
+---
+title: XtMapper
+description: Keymapper
+template: splash
+hero:
+  image:
+    file: ../../assets/logo.png
+  actions:
+    - text: Documentation
+      link: /guides/about/
+      icon: right-arrow
+      variant: primary
+    - text: Skip tutorial
+      link: https://starlight.astro.build
+      icon: external
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<div class="hero-bg">
+	<div class="bg-logo"></div>
+	<div class="bg-grad"></div>
+	<div class="bg-grad-red"></div>
+</div>
+
+<CardGrid stagger>
+	<Card title="Easy to use" icon="rocket">
+		Designed with a focus on simplicity.
+	</Card>
+	<Card title="Featured" icon="rocket">
+		Includes a lot of modes.
+	</Card>
+	<Card title="Customizable" icon="setting">
+		Try different settings when needed.
+	</Card>
+	<Card title="Fast" icon="rocket">
+		Built for low latency and high performance.
+	</Card>
+</CardGrid>
