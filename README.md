@@ -1,5 +1,8 @@
-# XtMapper Docs
+# XtMapper Docs [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)  
 https://xtr126.github.io/XtMapper-docs
+
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/Xtr126/XtMapper-docs/tree/main)
+[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/Xtr126/XtMapper-docs/tree/main)
 
 ## 🧞 Commands
 
