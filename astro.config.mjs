@@ -11,6 +11,9 @@ export default defineConfig({
 			social: {
 				github: 'https://github.com/Xtr126/XtMapper',
 			},
+			logo: {
+				src: '/public/favicon.png',
+			},
 			sidebar: [
 				{
 					label: 'Introduction',

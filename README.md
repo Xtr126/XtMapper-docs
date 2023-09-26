@@ -1,4 +1,4 @@
-# Xtmapper Docs
+# XtMapper Docs
 https://xtr126.github.io/XtMapper-docs
 
 ## 🧞 Commands
