@@ -14,6 +14,10 @@ export default defineConfig({
 			logo: {
 				src: '/public/favicon.png',
 			},
+			customCss: [
+			// Relative path to your custom CSS file
+			'./src/styles/custom.css'
+			],
 			sidebar: [
 				{
 					label: 'Introduction',

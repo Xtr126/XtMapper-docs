@@ -1,0 +1,35 @@
+:root {
+	--overlay-blurple: #884c808e;
+    --gradient-bg: linear-gradient(215deg, var(--overlay-blurple), transparent 40%),
+    radial-gradient(var(--overlay-blurple), transparent 40%) no-repeat -60vw -40vh / 105vw 200vh,
+    radial-gradient(var(--overlay-blurple), transparent 65%) no-repeat 50% calc(100% + 20rem) /
+        60rem 30rem;
+    --sl-color-bg-sidebar: var(--gradient-bg);
+}
+
+:root[data-theme='light'] {
+	--overlay-blurple: #740e66c5;
+}
+
+.page {
+	background: var(--gradient-bg)
+}
+
+.card {
+	background: linear-gradient(215deg, #7c632e3b, transparent 50%)
+}
+
+[data-theme='dark'] header {
+	border-bottom: 1px solid transparent;
+    background-color: #00000020;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+}
+
+[data-has-hero] .hero > img {
+	filter: drop-shadow(0.6em 0.4em 0.2em #ff0000);
+}
+
+[data-has-hero] .hero > div {
+	filter: drop-shadow(0 1em 5em #00ccff);
+}
