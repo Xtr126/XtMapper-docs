@@ -1,22 +1,35 @@
 :root {
-	--overlay-blurple: #884c808e;
-    --gradient-bg: linear-gradient(215deg, var(--overlay-blurple), transparent 40%),
-    radial-gradient(var(--overlay-blurple), transparent 40%) no-repeat -60vw -40vh / 105vw 200vh,
-    radial-gradient(var(--overlay-blurple), transparent 65%) no-repeat 50% calc(100% + 20rem) /
-        60rem 30rem;
-    --sl-color-bg-sidebar: var(--gradient-bg);
+	--overlay-blurple: #e61a918e;
+    --sl-color-bg-sidebar: #00000000;
 }
 
 :root[data-theme='light'] {
-	--overlay-blurple: #740e66c5;
+	--overlay-blurple: #b214f160;
+	--sl-color-bg-sidebar: #00000000;
 }
 
-.page {
-	background: var(--gradient-bg)
+[data-theme='dark'] .page {
+	background: linear-gradient(215deg, var(--overlay-blurple), transparent 40%)
+}
+
+[data-theme='dark'][data-has-toc] .page {
+	background: radial-gradient( #5754f327, #740e3e46 , transparent 90%) 10vw -30vh / 120vw 150vh;
+}
+
+[data-theme='light'] .page {
+	background: linear-gradient(215deg, var(--overlay-blurple), transparent 40%)
+}
+
+[data-theme='light'][data-has-toc] .page {
+	background: radial-gradient( #5754f311, #0e657423, transparent 90%) 10vw -30vh / 120vw 150vh;
 }
 
 .card {
 	background: linear-gradient(215deg, #7c632e3b, transparent 50%)
+}
+
+[data-theme='light'] .card {
+	background: linear-gradient(255deg, #00ff552c, transparent 90%)
 }
 
 [data-theme='dark'] header {
@@ -30,6 +43,14 @@
 	filter: drop-shadow(0.6em 0.4em 0.2em #ff0000);
 }
 
+[data-has-hero][data-theme='light'] .hero > img {
+	filter: drop-shadow(0.3em 0.7em 0.7em #641f1f);
+}
+
 [data-has-hero] .hero > div {
 	filter: drop-shadow(0 1em 5em #00ccff);
+}
+
+[data-has-hero][data-theme='light'] .hero > div {
+	filter: drop-shadow(0 2em 4em #00ccff);
 }
