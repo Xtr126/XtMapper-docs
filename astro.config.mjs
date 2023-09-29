@@ -20,15 +20,17 @@ export default defineConfig({
 			],
 			sidebar: [
 				{
-					label: 'Introduction',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'About XtMapper', link: '/guides/about/' },
-					],
+					label: 'Quick Start',
+					autogenerate: { directory: 'guides' },
+
 				},
 				{
-					label: 'Reference',
+					label: 'Features',
 					autogenerate: { directory: 'reference' },
+				},
+				{
+					label: 'Wayland client',
+					autogenerate: { directory: 'wlclient' },
 				},
 			],
 			favicon: '/favicon.png',
