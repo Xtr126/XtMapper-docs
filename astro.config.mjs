@@ -22,11 +22,14 @@ export default defineConfig({
 				{
 					label: 'Quick Start',
 					autogenerate: { directory: 'guides' },
-
 				},
 				{
 					label: 'Features',
-					autogenerate: { directory: 'reference' },
+					autogenerate: { directory: 'features' },
+				},
+				{
+					label: 'Settings',
+					autogenerate: { directory: 'settings' },
 				},
 				{
 					label: 'Wayland client',
