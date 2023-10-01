@@ -3,6 +3,8 @@ https://xtr126.github.io/XtMapper-docs
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/Xtr126/XtMapper-docs/tree/main)
 [![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/Xtr126/XtMapper-docs/tree/main)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Xtr126/XtMapper-docs)  
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Xtr126/XtMapper-docs)
 
 ## 🧞 Commands
 
