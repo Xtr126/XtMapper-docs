@@ -2,7 +2,7 @@
 title: Usage
 description: Running the client.
 ---
-Requires latest XtMapper APK for using with the client. You can download it from last successful build: [GitHub actions](https://github.com/Xtr126/XtMapper/actions)
+Requires a specific version of XtMapper for using with the client. You can download it from [GitHub actions](https://nightly.link/Xtr126/XtMapper/actions/runs/6338821216)
 
     $ chmod a+x ./client
     $ ./client
