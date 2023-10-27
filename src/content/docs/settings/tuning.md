@@ -3,7 +3,7 @@ title: Tuning
 description: In-app settings
 ---
 
-![image](../../assets/settings_tuning.jpg)
+![image](../../assets/settings_tuning.png)
 - Mouse sensitivity: Adjust the speed of the cursor.  
 Changes fast the pointer moves when XtMapper is activated and running.
 - Scroll speed: When XtMapper is running it smoothens scrolling.   
