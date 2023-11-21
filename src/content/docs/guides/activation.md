@@ -10,7 +10,7 @@ adb shell sh /sdcard/Android/data/xtr.keymapper/files/xtMapper.sh
 Use start button to start/stop service. When service is running, drag down notification panel and click on the notification to launch editor.
 
 :::note[Alternate method]
-This command is for XtMapper v2.0.1 only.  
+This command is for XtMapper v2.x only.  
 It may be changed at any time or might not work.  
 ```bash
 /system/bin/app_process -Djava.library.path=$(echo /data/app/*/xtr.keymapper*/lib/x86_64) -Djava.class.path=$(echo /data/app/*/xtr.keymapper*/base.apk) / xtr.keymapper.server.RemoteService
