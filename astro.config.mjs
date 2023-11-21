@@ -31,10 +31,6 @@ export default defineConfig({
 					label: 'Settings',
 					autogenerate: { directory: 'settings' },
 				},
-				{
-					label: 'Wayland client',
-					autogenerate: { directory: 'wlclient' },
-				},
 			],
 			favicon: '/favicon.png',
 		}),
