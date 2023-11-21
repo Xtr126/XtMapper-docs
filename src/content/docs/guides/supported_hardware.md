@@ -2,4 +2,7 @@
 title: Supported hardware
 description: Listing supported hardware.
 ---
-Touchpads are not supported, only mouse and keyboard. 
+- Mouse (USB or Bluetooth)
+- Keyboard
+- Touchpads (Since v2.1.1)
+- Some keys on gamepads may also work. 
