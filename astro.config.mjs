@@ -31,6 +31,10 @@ export default defineConfig({
 					label: 'Settings',
 					autogenerate: { directory: 'settings' },
 				},
+				{
+					label: 'Bliss OS',
+					autogenerate: { directory: 'blissos' },
+				},
 			],
 			favicon: '/favicon.png',
 		}),
