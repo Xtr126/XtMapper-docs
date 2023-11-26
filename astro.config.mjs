@@ -7,7 +7,6 @@ export default defineConfig({
 	base: '/XtMapper-docs',
 	integrations: [
 		starlight({
-			expressiveCode: false,
 			title: 'XtMapper',
 			social: {
 				github: 'https://github.com/Xtr126/XtMapper',
