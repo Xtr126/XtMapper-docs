@@ -1,0 +1,44 @@
+diff --git a/gpu_display/src/gpu_display_wl.rs b/gpu_display/src/gpu_display_wl.rs
+index cdc097468..ec30b9971 100644
+--- a/gpu_display/src/gpu_display_wl.rs
++++ b/gpu_display/src/gpu_display_wl.rs
+@@ -323,18 +323,24 @@ impl DisplayT for DisplayWl {
+             // TODO(tutankhamen): slot is always 0, because all the input
+             // events come from mouse device, i.e. only one touch is possible at a time.
+             // Full MT protocol has to be implemented and properly wired later.
+-            DWL_EVENT_TYPE_TOUCH_DOWN | DWL_EVENT_TYPE_TOUCH_MOTION => {
+-                let tracking_id = if event.event_type == DWL_EVENT_TYPE_TOUCH_DOWN {
+-                    self.next_tracking_id()
+-                } else {
+-                    self.current_tracking_id()
+-                };
+-
++            DWL_EVENT_TYPE_TOUCH_MOTION => {
++                let events = vec![
++                    virtio_input_event::multitouch_absolute_x(max(0, event.params[0])),
++                    virtio_input_event::multitouch_absolute_y(max(0, event.params[1])),
++                ];
++                Some(GpuDisplayEvents {
++                    events,
++                    device_type: EventDeviceKind::Touchscreen,
++                })
++            }
++            DWL_EVENT_TYPE_TOUCH_DOWN => {
++                let tracking_id = self.next_tracking_id();
+                 let events = vec![
+                     virtio_input_event::multitouch_slot(0),
+                     virtio_input_event::multitouch_tracking_id(tracking_id),
+                     virtio_input_event::multitouch_absolute_x(max(0, event.params[0])),
+                     virtio_input_event::multitouch_absolute_y(max(0, event.params[1])),
++                    virtio_input_event::touch(true),
+                 ];
+                 Some(GpuDisplayEvents {
+                     events,
+@@ -343,6 +349,7 @@ impl DisplayT for DisplayWl {
+             }
+             DWL_EVENT_TYPE_TOUCH_UP => {
+                 let events = vec![
++                    virtio_input_event::touch(false),
+                     virtio_input_event::multitouch_slot(0),
+                     virtio_input_event::multitouch_tracking_id(-1),
+                 ];
