@@ -3,10 +3,10 @@ title: Fast VM with crosvm
 description: Running Bliss OS in crosvm.  
 ---
   
-[crosvm](https://chromium.googlesource.com/chromiumos/platform/crosvm/) can be used to run a blazing fast Android VM on a Linux host with GPU acceleration, negligible overhead and close to native performance.  
+[crosvm](https://chromium.googlesource.com/crosvm/crosvm) can be used to run a blazing fast Android VM on a Linux host with GPU acceleration, negligible overhead and close to native performance.  
 The Android window feels smoother than ever before.  
 It can configured to use udmabuf, minigbm and wayland for a incredibly efficient rendering pipeline with zero copy display from guest to host wayland server.  
-It doesn't work as expected out of the box, so we will have to apply some patches to fix mouse input and color issues.  
+It doesn't work as expected out of the box, so we will have to apply some patches to fix mouse input.  
 
 
 Follow the instructions on https://crosvm.dev/book/building_crosvm/linux.html to set up the environment.  
@@ -20,9 +20,10 @@ curl https://xtr126.github.io/XtMapper-docs/00-crosvm-mouse-android.patch | patc
 ```
 Build crosvm with virgl support enabled
 ```bash
-cargo build --features gpu,virgl_renderer,wl-dmabuf --release
+CROSVM_USE_SYSTEM_VIRGLRENDERER=1 CROSVM_USE_SYSTEM_MINIGBM=1 cargo build --features gpu,virgl_renderer,wl-dmabuf --release
 ```
-The executable will be in ./target/release/crosvm 
+The executable will be in ./target/release/crosvm  
+Remove the `CROSVM_USE_SYSTEM_VIRGLRENDERER=1 CROSVM_USE_SYSTEM_MINIGBM=1` flags if build fails or you are using an ancient linux distro with older versions of libgbm or virglrenderer.
 ```bash
 ./target/release/crosvm run --cpus 2 --mem 2842 --disable-sandbox \
                 -i ~/bliss-16.8/initrd.img -p "root=/dev/ram0 quiet SRC=/ video=1280x720 SETUPWIZARD=0 GRALLOC=minigbm_gbm_mesa HWC=drm_minigbm_celadon" \
@@ -33,8 +34,9 @@ The executable will be in ./target/release/crosvm
                 --wayland-sock=/run/user/1000/wayland-0  \
                 ~/bliss-16.8/kernel
 ```
-The android.img was prepared using [the script](../quick_vm).   
-Read the [crosvm documentation](https://crosvm.dev/book) for audio and networking.
+The android.img was prepared using [the script](../quick_vm).  
+Read the [crosvm documentation](https://crosvm.dev/book) for audio and networking.  
+If colors are inverted, turn on invert colors in Android Settings > Accessibility as a workaround or compile minigbm and virglrenderer with minigbm allocation enabled.  
 ## For reference
 crosvm command lines extracted from certain versions of Google products.
 
