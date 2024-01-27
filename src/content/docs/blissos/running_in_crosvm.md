@@ -31,7 +31,7 @@ Remove the `CROSVM_USE_SYSTEM_VIRGLRENDERER=1 CROSVM_USE_SYSTEM_MINIGBM=1` flags
                 --gpu=backend=virglrenderer,context-types=virgl2,udmabuf=true,egl=true,surfaceless=true,glx=false,gles=true,width=1280,height=720 \
                 --display-window-keyboard \
                 --display-window-mouse \
-                --wayland-sock=/run/user/1000/wayland-0  \
+                --wayland-sock=$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY  \
                 ~/bliss-16.8/kernel
 ```
 The android.img was prepared using [the script](../quick_vm).  
