@@ -3,6 +3,8 @@ title: Fast VM with crosvm
 description: Running Bliss OS in crosvm.  
 ---
   
+import VirtWifiStaticIP from '../../assets/VirtWifiStaticIP.mp4';
+
 [crosvm](https://chromium.googlesource.com/crosvm/crosvm) can be used to run a blazing fast Android VM on a Linux host with GPU acceleration, negligible overhead and close to native performance.  
 The Android window feels smoother than ever before.  
 It can configured to use udmabuf, minigbm and wayland for a incredibly efficient rendering pipeline with zero copy display from guest to host wayland server.  
@@ -26,16 +28,42 @@ The executable will be in ./target/release/crosvm
 Remove the `CROSVM_USE_SYSTEM_VIRGLRENDERER=1 CROSVM_USE_SYSTEM_MINIGBM=1` flags if build fails or you are using an ancient linux distro with older versions of libgbm or virglrenderer.
 ```bash
 ./target/release/crosvm run --cpus 2 --mem 2842 --disable-sandbox \
-                -i ~/bliss-16.8/initrd.img -p "root=/dev/ram0 quiet SRC=/ video=1280x720 SETUPWIZARD=0 GRALLOC=minigbm_gbm_mesa HWC=drm_minigbm_celadon" \
+                --initrd ~/bliss-16.8/initrd.img \
+                --params "root=/dev/ram0 quiet SRC=/ video=1280x720 GRALLOC=minigbm_gbm_mesa HWC=drm_minigbm_celadon" \
                 --rwdisk ~/bliss-16.8/android.img \
-                --gpu=backend=virglrenderer,context-types=virgl2,udmabuf=true,egl=true,surfaceless=true,glx=false,gles=true,width=1280,height=720 \
+                --gpu backend=virglrenderer,context-types=virgl2,udmabuf=true,egl=true,surfaceless=true,glx=false,gles=true,width=1280,height=720 \
                 --display-window-keyboard \
                 --display-window-mouse \
-                --wayland-sock=$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY  \
+                --wayland-sock=$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY \
                 ~/bliss-16.8/kernel
 ```
+It cannot render to screen without using the right gralloc/hwc options.
 The android.img was prepared using [the script](../quick_vm).  
-Read the [crosvm documentation](https://crosvm.dev/book) for audio and networking.  
+Add SETUPWIZARD=0 to kernel parameters (--params "..") to bypass Android setup wizard.
+## Networking
+https://crosvm.dev/book/running_crosvm/example_usage.html#add-networking-support
+```bash
+./tools/examples/setup_network
+```
+Add `--net tap-name=crosvm_tap` to the crosvm command line.
+
+```bash
+crosvm run
+...
+--net tap-name=crosvm_tap \
+...
+```
+A static IP configuration is required inside the Android VM to connect to the network. However Android does not have settings to configure static IP for ethernet connections. We can use VirtWifi feature of Android-x86 as a workaround.  
+Add VIRT_WIFI=1 to kernel command line parameters to enable this feature.
+```bash
+--params "... VIRT_WIFI=1"
+```
+Then connect to VirtWifi network from Android settings. Select Static IP and set IP Address to 192.168.10.2 and gateway to 192.168.10.1
+<video width="1280" height="720" controls preload="none">
+  <source src={VirtWifiStaticIP} type="video/mp4">
+  </source>
+</video>
+
 If colors are inverted, turn on invert colors in Android Settings > Accessibility as a workaround or compile minigbm and virglrenderer with minigbm allocation enabled.  
 ## For reference
 crosvm command lines extracted from certain versions of Google products.
