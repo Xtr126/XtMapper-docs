@@ -54,8 +54,8 @@ In a [root shell](../termux):
 ```
 Now you should enter a tty with the login shell.  
 Use Alt+F7 / ALt+F1 / Alt+(left/right) arrow keys to switch between Android and Linux.  
-If you have [xinitrc](https://wiki.archlinux.org/title/xinit) configured:s
+If you have [xinitrc](https://wiki.archlinux.org/title/xinit) configured:
 ```bash
 dbus-run-session startx
 ```
-Ctrl+Alt+F7 / Ctrl+Alt+F1 to switch between Android and Linux. 
+Ctrl+Alt+F7 / Ctrl+Alt+F1 to switch between Android and Linux.
