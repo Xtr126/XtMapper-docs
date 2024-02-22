@@ -1,0 +1,14 @@
+diff --git a/rutabaga_gfx/build.rs b/rutabaga_gfx/build.rs
+index 725e70443..31704e405 100644
+--- a/rutabaga_gfx/build.rs
++++ b/rutabaga_gfx/build.rs
+@@ -185,6 +185,9 @@ fn build_and_probe_virglrenderer(out_dir: &Path) -> Result<()> {
+         .args(get_meson_cross_args())
+         .arg(format!("-Dplatforms={}", platforms.join(",")))
+         .arg("-Ddefault_library=static")
++        .arg("-Dminigbm_allocation=true")
++        .arg("-Dvenus=true")
++        .arg("-Dbuildtype=release")
+         .arg(out_dir.as_os_str());
+ 
+     let setup_status = setup.status()?;

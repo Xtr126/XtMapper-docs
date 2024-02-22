@@ -1,0 +1,16 @@
+diff --git a/meson.build b/meson.build
+index de6d16b5..26c6816a 100644
+--- a/meson.build
++++ b/meson.build
+@@ -274,7 +274,10 @@ with_render_server_worker = get_option('render-server-worker')
+ render_server_install_dir = get_option('prefix') / get_option('libexecdir')
+ if with_venus
+    if with_minigbm_allocation
+-      gbm_dep = dependency('gbm')
++         gbm_dep = declare_dependency(
++                     dependencies : cc.find_library('minigbm.pie', dirs : [meson.current_build_dir() / '../minigbm']),
++                     include_directories : include_directories('../minigbm'),
++                  )
+    endif
+    venus_dep = dependency('vulkan')
+ 
