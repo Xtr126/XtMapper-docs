@@ -75,7 +75,9 @@ curl https://xtr126.github.io/XtMapper-docs/01-crosvm-build-virglrenderer-minigb
 ```
 Patching virglrenderer source is also required to link against libminigbm built by cargo.
 ```bash
+cd third_party/virglrenderer
 curl https://xtr126.github.io/XtMapper-docs/02-virglrenderer-link-crosvm-minigbm.patch | patch -p1
+cd ../../
 ```
 
 
