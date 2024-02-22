@@ -45,7 +45,7 @@ https://crosvm.dev/book/running_crosvm/example_usage.html#add-networking-support
 ```bash
 ./tools/examples/setup_network
 ```
-Add `--net tap-name=crosvm_tap` to the crosvm command line.
+Add `--net tap-name=crosvm_tap` to the crosvm cmdline.
 
 ```bash
 crosvm run
@@ -54,7 +54,7 @@ crosvm run
 ...
 ```
 A static IP configuration is required inside the Android VM to connect to the network. However Android does not have settings to configure static IP for ethernet connections. We can use VirtWifi feature of Android-x86 as a workaround.  
-Add VIRT_WIFI=1 to kernel command line parameters to enable this feature.
+Add VIRT_WIFI=1 to kernel cmdline parameters to enable this feature.
 ```bash
 --params "... VIRT_WIFI=1"
 ```
@@ -66,10 +66,10 @@ Then connect to VirtWifi network from Android settings. Select Static IP and set
 
 ## Troubleshooting
 - Colors are inverted: Turn on invert colors in Android Settings > Accessibility as a workaround or compile minigbm and virglrenderer with minigbm allocation enabled and link with crosvm binary.  
-- crosvm crashes with virtio-gpu error: Remove `udmabuf=true` from crosvm command line, udmabuf is not supported by all GPUs.
+- crosvm crashes with virtio-gpu error: Remove `udmabuf=true` from crosvm cmdline, udmabuf is not supported by all GPUs.
 
 ## Venus Vulkan driver 
-After applying the following patch, the embedded virglrenderer library is compiled with minigbm allocation. This also enables venus for Vulkan support which requires minigbm.
+After applying the following patch, the embedded virglrenderer library is compiled with minigbm allocation. This is required on the host for venus.
 ```bash
 curl https://xtr126.github.io/XtMapper-docs/01-crosvm-build-virglrenderer-minigbm-allocation.patch | patch -p1
 ```
@@ -78,8 +78,26 @@ Patching virglrenderer source is also required to link against libminigbm built 
 cd third_party/virglrenderer
 curl https://xtr126.github.io/XtMapper-docs/02-virglrenderer-link-crosvm-minigbm.patch | patch -p1
 cd ../../
+cargo build --features gpu,virgl_renderer,wl-dmabuf --release
+```
+Add `vulkan=true` to the list of comma separated gpu flags in crosvm cmdline.
+```bash
+--gpu backend=virglrenderer,context-types=virgl2...,vulkan=true
 ```
 
+## virtiofs shared /data
+Add `--shared-dir "/absolute/path/to/bliss/data:data:type=fs:cache=always"` to the crosvm cmdline.
+
+```bash
+crosvm run
+...
+--shared-dir "/home/user/bliss-16.8/data:data:type=fs:cache=always" \
+...
+```
+Add `DATA=virtiofs` to kernel cmdline parameters.
+```bash
+--params "... DATA=virtiofs"
+```
 
 ## For reference
 crosvm command lines extracted from certain versions of Google products.
