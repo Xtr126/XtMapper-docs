@@ -16,6 +16,14 @@ Use the above command if your Android ROM has storage issues and XtMapper can't 
 It was changed from RemoteService to RemoteServiceShell in v2.1.1.
 :::
 
+## Non-rooted devices 
+Since v2.1.1 XtMapper supports non-rooted devices.
+Install Shizuku and authorize XtMapper from Shizuku app. https://shizuku.rikka.app  
+Additionally “Use Shizuku” should be enabled in XtMapper Settings > Misc.
+A workaround using adb shell may be needed on certain devices: https://developer.android.com/about/versions/12/behavior-changes-all#test-untrusted-touch-events
+
+
+
 ## Why activate?
 In Android, for security reasons user apps are not allowed to access system APIs required for injecting motion (touch) events.  
 The script executes Xtmapper remote service with higher privileges (adb shell / root).  
