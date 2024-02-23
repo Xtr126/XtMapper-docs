@@ -1,8 +1,8 @@
 diff --git a/gpu_display/src/gpu_display_wl.rs b/gpu_display/src/gpu_display_wl.rs
-index cdc097468..ec30b9971 100644
+index 943b496b3..df72f828e 100644
 --- a/gpu_display/src/gpu_display_wl.rs
 +++ b/gpu_display/src/gpu_display_wl.rs
-@@ -323,18 +323,24 @@ impl DisplayT for DisplayWl {
+@@ -316,18 +316,24 @@ impl DisplayT for DisplayWl {
              // TODO(tutankhamen): slot is always 0, because all the input
              // events come from mouse device, i.e. only one touch is possible at a time.
              // Full MT protocol has to be implemented and properly wired later.
@@ -34,7 +34,7 @@ index cdc097468..ec30b9971 100644
                  ];
                  Some(GpuDisplayEvents {
                      events,
-@@ -343,6 +349,7 @@ impl DisplayT for DisplayWl {
+@@ -336,6 +342,7 @@ impl DisplayT for DisplayWl {
              }
              DWL_EVENT_TYPE_TOUCH_UP => {
                  let events = vec![

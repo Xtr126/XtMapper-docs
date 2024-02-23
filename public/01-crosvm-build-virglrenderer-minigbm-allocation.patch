@@ -1,5 +1,5 @@
 diff --git a/rutabaga_gfx/build.rs b/rutabaga_gfx/build.rs
-index 725e70443..31704e405 100644
+index 3acb58ea4..9e24ea967 100644
 --- a/rutabaga_gfx/build.rs
 +++ b/rutabaga_gfx/build.rs
 @@ -185,6 +185,9 @@ fn build_and_probe_virglrenderer(out_dir: &Path) -> Result<()> {
