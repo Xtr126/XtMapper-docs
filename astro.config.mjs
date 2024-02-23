@@ -36,6 +36,9 @@ export default defineConfig({
 					autogenerate: { directory: 'blissos' },
 				},
 			],
+			editLink: {
+				baseUrl: 'https://github.com/Xtr126/XtMapper-docs/edit/main/', 
+			},
 			favicon: '/favicon.png',
 		}),
 	],
