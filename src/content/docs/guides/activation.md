@@ -2,6 +2,7 @@
 title: Activation
 description: Documentation for activation process.
 ---
+## Activation using command
 Open a [root shell](../../blissos/termux) in termux and run the script: 
 ```bash
 sh /sdcard/Android/data/xtr.keymapper/files/xtMapper.sh
@@ -17,12 +18,9 @@ It was changed from RemoteService to RemoteServiceShell in v2.1.1.
 :::
 
 ## Non-rooted devices 
-Since v2.1.1 XtMapper supports non-rooted devices.
+Since v2.1.2 XtMapper supports non-rooted devices.
 Install Shizuku and authorize XtMapper from Shizuku app. https://shizuku.rikka.app  
-Additionally “Use Shizuku” should be enabled in XtMapper Settings > Misc.
-A workaround using adb shell may be needed on certain devices: https://developer.android.com/about/versions/12/behavior-changes-all#test-untrusted-touch-events
-
-
+Enable “Use Shizuku” in XtMapper Settings > Misc.
 
 ## Why activate?
 In Android, for security reasons user apps are not allowed to access system APIs required for injecting motion (touch) events.  
