@@ -2,6 +2,7 @@
 title: Activation
 description: Documentation for activation process.
 ---
+On a rooted device, simply click on start button to activate.
 ## Activation using command
 Open a [root shell](../../blissos/termux) in termux and run the script: 
 ```bash
