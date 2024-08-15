@@ -1,6 +1,6 @@
 ---
 title: Linux subsystem
-description: Setup a Linux development environment in Bliss OS.  
+description: Setup a Linux chroot container in Bliss OS.  
 ---
   
 Provides 100% CPU,RAM,GPU performance same as running Linux natively. OpenGL and Vulkan works. X11 renders directly using KMS/DRM to screen.  
@@ -12,14 +12,14 @@ But you have access to two OS simultaneously this way with less resource consump
 Boot into the Linux installation and copy /run/udev 
 
 ```bash
-cp -a /run/udev ~/Documents  
+# cp -a /run/udev ~/Documents  
 ```
 Then after rebooting and chroot into linux from Android, symlink it to /run
 ```bash
-sudo ln -s ~/Documents/udev /run/ 
+# ln -s ~/Documents/udev /run/ 
 ```
 
-Make a script for chroot into it, this can be taken for reference.  
+Make a simple script to chroot into it, this can be taken for reference.  
 ```bash title="arch-chroot.sh"
 #!/data/adb/ksu/bin/busybox sh
 USER=user
@@ -47,13 +47,13 @@ ls /dev/nvme0n1p2 2>/dev/null || ln -s /dev/block/* /dev/
 echo nameserver 192.168.1.1 > etc/resolv.conf 
 exec chroot /mnt/arch /bin/su $USER -l "$@"
 ```
-openvt works only on Bliss 15.10/14.10.1/16.9 and newer.  
+openvt requires busybox, we can use the binary from KernelSU.  
 In a [root shell](../termux):
 ```bash
-/data/adb/ksu/bin/busybox openvt -s arch-chroot.sh
+/data/adb/ksu/bin/busybox openvt -s /path/to/arch-chroot.sh
 ```
 Now you should enter a tty with the login shell.  
-Use Alt+F7 / ALt+F1 / Alt+(left/right) arrow keys to switch between Android and Linux.  
+Use Alt+F7 / Alt+F1 / Alt+(left/right) arrow keys to switch between Android and Linux.  
 If you have [xinitrc](https://wiki.archlinux.org/title/xinit) configured:
 ```bash
 dbus-run-session startx
