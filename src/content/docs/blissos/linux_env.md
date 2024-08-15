@@ -23,11 +23,13 @@ Make a simple script to chroot into it, this can be taken for reference.
 ```bash title="arch-chroot.sh"
 #!/data/adb/ksu/bin/busybox sh
 USER=user
-# Already mounted
+# If already mounted
 test -f /mnt/arch/etc/os-release && exec chroot /mnt/arch /bin/su $USER -l "$@"
 [ ! -d /mnt/arch ] && mkdir /mnt/arch
+# Partition containing root file system 
 mount /dev/block/nvme0n1p2 /mnt/arch -o noatime
-mount /dev/block/nvme0n1p1 /mnt/arch/boot
+# EFI system partition (optional)
+mount /dev/block/nvme0n1p1 /mnt/arch/boot 
 cd /mnt/arch
 
 mount -t proc proc proc/ -o nosuid,noexec,nodev
@@ -41,7 +43,7 @@ mkdir dev/shm && mount -t tmpfs shmfs dev/shm -o rw,nosuid,nodev,inode64
 chmod 777 tmp dev/shm
 
 # For X11 server
-chroot /mnt/arch /bin/chown -hR $USER /dev/input /dev/dri /dev/tty1
+chroot /mnt/arch /bin/chown -hR $USER /dev/input /dev/dri /dev/tty1 /dev/tty2
 ls /dev/nvme0n1p2 2>/dev/null || ln -s /dev/block/* /dev/
 # Usually your router IP address, required for networking
 echo nameserver 192.168.1.1 > etc/resolv.conf 
