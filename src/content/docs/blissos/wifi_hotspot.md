@@ -125,16 +125,15 @@ Further reading:
    - Unmount the system image:
 
      ```sh
-     umount /mnt/system
+     umount /tmp/system_img
      ```
 
    - Repack `system.img` if necessary.
 
 2. **Reboot Your System**
 
-   - Restart your system for the changes to take effect. After rebooting, you should be able to configure and use the Wi-Fi hotspot feature.
+   - Restart your system for the changes to take effect. After rebooting, you should be able to use the Wi-Fi hotspot feature.
   
-
   
   
 :::danger[Important] 
