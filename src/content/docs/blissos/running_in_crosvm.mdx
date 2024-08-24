@@ -22,10 +22,14 @@ curl https://xtr126.github.io/XtMapper-docs/00-crosvm-mouse-android.patch | patc
 ```
 Build crosvm with virgl support enabled
 ```bash
-CROSVM_USE_SYSTEM_VIRGLRENDERER=1 CROSVM_USE_SYSTEM_MINIGBM=1 cargo build --features gpu,virgl_renderer,wl-dmabuf --release
+CROSVM_USE_SYSTEM_VIRGLRENDERER=1 cargo build --features gpu,virgl_renderer,wl-dmabuf --release
+```
+If minigbm build is giving errors, patch the Makefile as below. [source](https://gitlab.freedesktop.org/virgl/virglrenderer/-/blob/b8aba68922116c9aa86f6f61494d61d7382b4af5/perf-testing/Docker/Dockerfile#L127)
+```bash
+ sed 's/-Wall/-Wno-maybe-uninitialized/g' -i third_party/minigbm/Makefile
 ```
 The executable will be in ./target/release/crosvm  
-Remove the `CROSVM_USE_SYSTEM_VIRGLRENDERER=1 CROSVM_USE_SYSTEM_MINIGBM=1` flags if build fails or you are using an ancient linux distro with older versions of libgbm or virglrenderer.
+Remove the `CROSVM_USE_SYSTEM_VIRGLRENDERER=1` flags if build fails or you are using an ancient linux distro with older versions of libgbm or virglrenderer.
 ```bash
 ./target/release/crosvm run --cpus 2 --mem 2842 --disable-sandbox \
                 --initrd ~/bliss-16.8/initrd.img \
