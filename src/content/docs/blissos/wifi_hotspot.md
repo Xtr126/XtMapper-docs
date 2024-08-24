@@ -144,4 +144,4 @@ This workaround provides a temporary solution for enabling Wi-Fi hotspot functio
 
    - This workaround allows you to share a connection not being used by your Wi-Fi adapter, such as Ethernet or mobile data. However, not all hardware supports sharing the same Wi-Fi connection on the same adapter. Not all Wi-Fi adapters can function as both a station (client) and an access point (AP) simultaneously with Linux drivers.
 
-   - To potentially overcome this limitation, hostapd can be configured to use a different Wi-Fi interface (e.g`wlan1` instead of `wlan0`). This can be done by modifying the configuration file provided to hostapd. It is yet to be investigated.
+   - To potentially overcome this limitation, hostapd can be configured to use a different Wi-Fi interface (e.g`wlan1` instead of `wlan0`). This can be done by modifying the configuration file provided to hostapd. It is yet to be investigated. https://source.android.com/docs/core/connect/wifi-sta-ap-concurrency
