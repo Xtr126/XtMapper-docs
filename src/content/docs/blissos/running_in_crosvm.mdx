@@ -35,7 +35,8 @@ Remove the `CROSVM_USE_SYSTEM_VIRGLRENDERER=1` flags if build fails or you are u
                 --initrd ~/bliss-16.8/initrd.img \
                 --params "root=/dev/ram0 quiet SRC=/ video=1280x720 GRALLOC=minigbm_gbm_mesa HWC=drm_minigbm_celadon" \
                 --rwdisk ~/bliss-16.8/android.img \
-                --gpu backend=virglrenderer,context-types=virgl2,udmabuf=true,egl=true,surfaceless=true,glx=false,gles=true,width=1280,height=720 \
+                --gpu=backend=virglrenderer,vulkan=false,udmabuf=true \
+                --gpu-display=mode=windowed[1280,720],dpi=[160,160],refresh-rate=60 \
                 --display-window-keyboard \
                 --display-window-mouse \
                 --wayland-sock=$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY \
@@ -82,13 +83,23 @@ Patching virglrenderer source is also required to link against libminigbm built 
 cd third_party/virglrenderer
 curl https://xtr126.github.io/XtMapper-docs/02-virglrenderer-link-crosvm-minigbm.patch | patch -p1
 cd ../../
-cargo build --features gpu,virgl_renderer,wl-dmabuf --release
 ```
-Add `vulkan=true` to the list of comma separated gpu flags in crosvm cmdline.
+Setting the appropriate CFLAGS for your GPU allows minigbm to use native DRI backend, which also fixes the color issue. However it may not work on all GPUs.
 ```bash
---gpu backend=virglrenderer,context-types=virgl2...,vulkan=true
+CFLAGS=-DDRV_<I915 or AMDGPU> cargo build --features gpu,virgl_renderer,wl-dmabuf --release
 ```
-
+Find `virgl_render_server` in build directory
+```bash
+find target/release/build/ -name virgl_render_server
+```
+Include `vulkan=true` in the list of comma separated gpu flags in crosvm cmdline and specify path to `virgl_render_server` found earlier.
+```bash
+...
+--gpu=vulkan=true,udmabuf=true \
+--gpu-display=mode=windowed[1280,720],dpi=[160,160],refresh-rate=60 \
+--gpu-render-server path=/path/to/virgl_render_server  \
+...
+```
 ## virtiofs shared /data
 Add `--shared-dir "/absolute/path/to/bliss/data:data:type=fs:cache=always"` to the crosvm cmdline.
 
