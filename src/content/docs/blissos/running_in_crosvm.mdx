@@ -33,7 +33,7 @@ Remove the `CROSVM_USE_SYSTEM_VIRGLRENDERER=1` flags if build fails or you are u
 ```bash
 ./target/release/crosvm run --cpus 2 --mem 2842 --disable-sandbox \
                 --initrd ~/bliss-16.8/initrd.img \
-                --params "root=/dev/ram0 quiet SRC=/ video=1280x720 GRALLOC=minigbm_gbm_mesa HWC=drm_minigbm_celadon" \
+                --params "root=/dev/ram0 quiet SRC=/ GRALLOC=minigbm_gbm_mesa HWC=drm_minigbm_celadon" \
                 --rwdisk ~/bliss-16.8/android.img \
                 --gpu=backend=virglrenderer,vulkan=false,udmabuf=true \
                 --gpu-display=mode=windowed[1280,720],dpi=[160,160],refresh-rate=60 \
