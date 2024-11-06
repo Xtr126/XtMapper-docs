@@ -21,7 +21,7 @@ Do not allocate more memory than what is needed to a Android VM. Android thinks 
 
 ### Downloading the script
 ```bash
-curl "https://raw.githubusercontent.com/Xtr126/androidx86-installer-qemu-linux/f7a258b905785f48244fe81d8ffdf7941e0c3520/install.sh" -qgb "" -fLC - --retry 3 --retry-delay 3 -o install.sh
+curl "https://raw.githubusercontent.com/Xtr126/androidx86-installer-qemu-linux/refs/heads/main/install.sh" -qgb "" -fLC - --retry 3 --retry-delay 3 -o install.sh
 ```
 As with any other script downloaded from the Internet it is recommended to check what it does before executing.
 To initialize a Android x86 VM in specified directory with a disk image of 8 GB, run:  
