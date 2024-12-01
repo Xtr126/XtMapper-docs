@@ -14,7 +14,7 @@ It doesn't work as expected out of the box, so we will have to apply some patche
 Follow the instructions on https://crosvm.dev/book/building_crosvm/linux.html to set up the environment.  
 Then switch to last known working commit for the patches:
 ```bash
-git checkout tags/v0.1.3-rutabaga-release-1235-g6a8a9c8ec
+git checkout c6ee39ce8
 ```
 Apply patch to fix mouse input
 ```bash
@@ -99,19 +99,6 @@ Include `vulkan=true` in the list of comma separated gpu flags in crosvm cmdline
 --gpu-display=mode=windowed[1280,720],dpi=[160,160],refresh-rate=60 \
 --gpu-render-server path=/path/to/virgl_render_server  \
 ...
-```
-## virtiofs shared /data
-Add `--shared-dir "/absolute/path/to/bliss/data:data:type=fs:cache=always"` to the crosvm cmdline.
-
-```bash
-crosvm run
-...
---shared-dir "/home/user/bliss-16.8/data:data:type=fs:cache=always" \
-...
-```
-Add `DATA=virtiofs` to kernel cmdline parameters.
-```bash
---params "... DATA=virtiofs"
 ```
 
 ## Enable serial console
