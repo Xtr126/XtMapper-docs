@@ -18,7 +18,7 @@ This guide is specifically for Android 14. Android 12 and earlier versions do no
 Before you begin, ensure you have:
 - A Bliss OS or Android-x86 system installed.
 - Unpacked system.sfs to allow modification: https://docs.blissos.org/knowledgebase/troubleshooting/remount-system-as-read-write/.
-- Extract the required files from cuttlefish images: [Android CI](http://ci.android.com/) or download a .zip containing the binaries from: https://t.me/blissx86/261552.
+- Extract the required files from cuttlefish images: [Android CI](http://ci.android.com/) or download a [.zip](https://t.me/blissx86/261552).
 - A high degree of Linux terminal skills, as it involves complex file manipulations and system modifications.
 
 ### Steps to Enable Wi-Fi Hotspot
@@ -28,7 +28,6 @@ Before you begin, ensure you have:
 The .zip file contains the necessary files:
 - `com.android.wifi.hal.apex_payload`
 - `com.google.cf.wifi.rc`
-- `hostapd.log`
 - `system/init/init.cutf_cvm.rc`
 - `vendor/vintf/manifest/android.hardware.wifi.hostapd.xml`
 
@@ -36,81 +35,81 @@ The .zip file contains the necessary files:
 
 1. **Resize the System Partition**
 
-   - Unpack the `system.sfs` file as mentioned before: https://docs.blissos.org/knowledgebase/troubleshooting/remount-system-as-read-write/.
-   - Resize the `system.img` file using the `resize2fs` command. Currently it is around 4GB in size, so we will increase its size to 5GB to accommodate the new files:
+- Unpack the `system.sfs` file as mentioned before: https://docs.blissos.org/knowledgebase/troubleshooting/remount-system-as-read-write/.
+- Resize the `system.img` file using the `resize2fs` command. Currently it is around 4GB in size, so we will increase its size to 5GB to accommodate the new files:
 
-     ```sh
-     resize2fs system.img 5G
-     ```
+```sh
+resize2fs system.img 5G
+```
 
 2. **Mount the System Image**
 
-   - Mount the resized `system.img` to a directory:
+- Mount the resized `system.img` to a directory:
 
-     ```sh
-     mkdir /tmp/system_img
-     mount -o loop system.img /tmp/system_img
-     ```
+```sh
+mkdir /tmp/system_img
+mount -o loop system.img /tmp/system_img
+```
 
 #### 3. Install the Apex Payload containing the hostapd HAL
 
 1. **Prepare the Directory**
 
-   - Create the necessary directory for the Apex payload:
+- Create the necessary directory for the Apex payload:
 
-     ```sh
-     mkdir -p /tmp/system_img/system/apex/com.android.wifi.hal
-     ```
+```sh
+mkdir -p /tmp/system_img/system/apex/com.android.wifi.hal
+```
 
 2. **Mount the Apex Payload**
 
-   - Loop mount `com.android.wifi.hal.apex_payload` read-only and copy its contents preserving permissions and SELinux context:
+- Loop mount `com.android.wifi.hal.apex_payload` read-only and copy its contents preserving permissions and SELinux context:
 
-     ```sh
-     mkdir /tmp/apex_payload
-     mount -o loop,ro com.android.wifi.hal.apex_payload /mnt/apex_payload
-     cp -a /mnt/apex_payload/* /tmp/system_img/system/apex/com.android.wifi.hal/
-     ```
+```sh
+mkdir /tmp/apex_payload
+mount -o loop,ro com.android.wifi.hal.apex_payload /mnt/apex_payload
+cp -a /mnt/apex_payload/* /tmp/system_img/system/apex/com.android.wifi.hal/
+```
 
 #### 4. Edit init.rc files
 `init.cutf_cvm.rc` contains the lines to be added to init.bliss_x86_64.rc for creating the necessary directories required for hostapd to function.  
 `com.google.cf.wifi.rc` contains the lines to be added to init.bliss_x86_64.rc to start a hostapd service.
 
 1. **Edit `/tmp/system_img/init.bliss_x86_64.rc` to include the hostapd service**
-     ```sh
-     ...
-    service hostapd /apex/com.android.wifi.hal/bin/hw/hostapd
-        interface aidl android.hardware.wifi.hostapd.IHostapd/default
-        class main
-        capabilities NET_ADMIN NET_RAW
-        user wifi
-        group wifi net_raw net_admin
-        disabled
-        oneshot
-     ...
-     ```
+```sh
+...
+service hostapd /apex/com.android.wifi.hal/bin/hw/hostapd
+   interface aidl android.hardware.wifi.hostapd.IHostapd/default
+   class main
+   capabilities NET_ADMIN NET_RAW
+   user wifi
+   group wifi net_raw net_admin
+   disabled
+   oneshot
+...
+```
 
 2. **Edit `/tmp/system_img/init.bliss_x86_64.rc` to add the code for creating /data/vendor/wifi/hostapd/sockets**
-     ```diff lang="bash"
-     on post-fs-data
-        # Create the directories used by the Wireless subsystem
-        mkdir /data/vendor/wifi 0771 wifi wifi
+```diff lang="bash"
+on post-fs-data
+   # Create the directories used by the Wireless subsystem
+   mkdir /data/vendor/wifi 0771 wifi wifi
 
-     +   mkdir /data/vendor/wifi/hostapd 0770 wifi wifi
-     +   mkdir /data/vendor/wifi/hostapd/sockets 0770 wifi wifi
++   mkdir /data/vendor/wifi/hostapd 0770 wifi wifi
++   mkdir /data/vendor/wifi/hostapd/sockets 0770 wifi wifi
 
-        mkdir /data/vendor/wifi/wpa 0770 wifi wifi
-        mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
-        mkdir /data/misc/dhcp 0770 dhcp dhcp
-        mkdir /data/misc/hcid 0770 bluetooth bluetooth
+   mkdir /data/vendor/wifi/wpa 0770 wifi wifi
+   mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
+   mkdir /data/misc/dhcp 0770 dhcp dhcp
+   mkdir /data/misc/hcid 0770 bluetooth bluetooth
 
-     ```
+```
 
 3. **Modify the system VINTF Manifest**  
-    - Copy `android.hardware.wifi.hostapd.xml` to the VINTF manifest directory:
-    ```sh
-    cp vendor/vintf/manifest/android.hardware.wifi.hostapd.xml /tmp/system_img/system/vendor/etc/vintf/manifest/android.hardware.wifi.hostapd.xml
-    ```
+- Copy `android.hardware.wifi.hostapd.xml` to the VINTF manifest directory:
+```sh
+cp vendor/vintf/manifest/android.hardware.wifi.hostapd.xml /tmp/system_img/system/vendor/etc/vintf/manifest/android.hardware.wifi.hostapd.xml
+```
 
 Further reading:
 1. https://source.android.com/docs/core/architecture/aidl/dynamic-aidl   

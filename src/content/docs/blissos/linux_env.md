@@ -12,11 +12,11 @@ But you have access to two OS simultaneously this way with less resource consump
 Boot into the Linux installation and copy /run/udev 
 
 ```bash
-# cp -a /run/udev ~/Documents  
+cp -a /run/udev ~/Documents  
 ```
 Then after rebooting and chroot into linux from Android, symlink it to /run
 ```bash
-# ln -s ~/Documents/udev /run/ 
+ln -s ~/Documents/udev /run/ 
 ```
 
 Make a simple script to chroot into it, this can be taken for reference.  
