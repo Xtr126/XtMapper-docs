@@ -32,10 +32,10 @@ export default defineConfig({
 					label: 'Settings',
 					autogenerate: { directory: 'settings' },
 				},
-				{
-					label: 'Bliss OS',
-					autogenerate: { directory: 'blissos' },
-				},
+				// {
+				// 	label: 'Bliss OS',
+				// 	autogenerate: { directory: 'blissos' },
+				// },
 			],
 			editLink: {
 				baseUrl: 'https://github.com/Xtr126/XtMapper-docs/edit/main/', 
