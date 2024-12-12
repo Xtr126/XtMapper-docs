@@ -1,0 +1,23 @@
+---
+title: Waydroid
+description: Documenting Waydroid specific instructions for XtMapper.
+---
+Xtmapper works by reading input events directly from event nodes created by the Linux kernel input subsystem, aiming for lowest latency.  
+https://docs.kernel.org/input/input.html  
+
+This apporach doesn't work for waydroid since host event nodes are not available in the waydroid container.  
+
+Due to the [interest of the community](https://github.com/Xtr126/XtMapper/issues?q=waydroid) we worked on two solutions for waydroid.  
+
+First a minimal wayland client that overlays the waydroid window and later a modified version of the cage kiosk wayland compositor to forward input events to XtMapper excluding waydroid.
+
+Both are maintained but cage-xtmapper should be the most convenient solution.  
+However it has a minimal overhead of running another wayland compositor.  
+
+Check the README.md in the relevant repository for instructions.  
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+<LinkCard title="Option 1 - wayland-getevent" href="https://github.com/Xtr126/wayland-getevent"/>
+
+<LinkCard title="Option 2 - cage-xtmapper" href="https://github.com/Xtr126/cage-xtmapper"/>
