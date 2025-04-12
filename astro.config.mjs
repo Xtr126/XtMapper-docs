@@ -13,7 +13,6 @@ export default defineConfig({
 			title: 'XtMapper',
 			social: {
 				github: 'https://github.com/Xtr126/XtMapper',
-				telegram: 'https://t.me/xtmapper',
 			},
 			logo: {
 				src: '/public/favicon.png',
