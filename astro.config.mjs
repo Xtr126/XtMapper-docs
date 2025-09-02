@@ -11,9 +11,9 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'XtMapper',
-			social: {
-				github: 'https://github.com/Xtr126/XtMapper',
-			},
+			social: [
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/Xtr126/XtMapper' },
+			],
 			logo: {
 				src: '/public/favicon.png',
 			},
