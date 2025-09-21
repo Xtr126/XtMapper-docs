@@ -34,6 +34,10 @@ export default defineConfig({
 					label: 'Settings',
 					autogenerate: { directory: 'settings' },
 				},
+				{
+					label: 'Waydroid',
+					autogenerate: { directory: 'waydroid' },
+				},
 				// {
 				// 	label: 'Bliss OS',
 				// 	autogenerate: { directory: 'blissos' },
