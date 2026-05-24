@@ -18,33 +18,33 @@ export default defineConfig({
 				src: '/public/favicon.png',
 			},
 			customCss: [
-			// Relative path to your custom CSS file
-			'./src/styles/custom.css'
+				// Relative path to your custom CSS file
+				'./src/styles/custom.css'
 			],
 			sidebar: [
 				{
 					label: 'Quick Start',
 					items: [
 						{ autogenerate: { directory: 'guides' } }
-					]
+					],
 				},
 				{
 					label: 'Features',
 					items: [
 						{ autogenerate: { directory: 'features' } }
-					]
+					],
 				},
 				{
 					label: 'Settings',
 					items: [
 						{ autogenerate: { directory: 'settings' } }
-					]
+					],
 				},
 				{
 					label: 'Waydroid',
 					items: [
 						{ autogenerate: { directory: 'waydroid' } }
-					]
+					],
 				},
 				// {
 				// 	label: 'Bliss OS',
