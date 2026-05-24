@@ -24,19 +24,27 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'Quick Start',
-					autogenerate: { directory: 'guides' },
+					items: [
+						{ autogenerate: { directory: 'guides' } }
+					]
 				},
 				{
 					label: 'Features',
-					autogenerate: { directory: 'features' },
+					items: [
+						{ autogenerate: { directory: 'features' } }
+					]
 				},
 				{
 					label: 'Settings',
-					autogenerate: { directory: 'settings' },
+					items: [
+						{ autogenerate: { directory: 'settings' } }
+					]
 				},
 				{
 					label: 'Waydroid',
-					autogenerate: { directory: 'waydroid' },
+					items: [
+						{ autogenerate: { directory: 'waydroid' } }
+					]
 				},
 				// {
 				// 	label: 'Bliss OS',
